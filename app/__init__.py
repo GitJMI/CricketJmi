@@ -1,4 +1,5 @@
 from flask import Flask,render_template
+from flask_cors import CORS
 from app.config import Config
 
 from app.extensions import db, migrate, jwt
@@ -8,6 +9,7 @@ from app.sockets.socket import init_socket
 
 def create_app():
     app = Flask(__name__)
+    CORS(app) # Enable CORS for all routes
 
 
     app.config.from_object(Config)
@@ -25,6 +27,6 @@ def create_app():
 
     @app.route("/")
     def index():
-        return render_template("backend is Running")
+        return render_template("backend is running")
 
     return app
