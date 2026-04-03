@@ -23,4 +23,8 @@ def create_app():
 
     init_socket(app)
 
+    @app.route("/")
+    def index():
+        return {"message": "Backend Running"}, 200
+
     return app
