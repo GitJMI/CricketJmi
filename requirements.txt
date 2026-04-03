@@ -10,3 +10,4 @@ eventlet
 marshmallow
 flask-cors 
 Flask-SQLalchemy
+gunicorn
