@@ -27,6 +27,6 @@ def create_app():
 
     @app.route("/")
     def index():
-        return render_template("backend is running")
+        return "backend is running"
 
     return app
