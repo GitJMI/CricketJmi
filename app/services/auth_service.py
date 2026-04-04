@@ -19,7 +19,11 @@ def register_user(data):
     # Automatically issue token to log them in directly
     token = create_access_token(
         identity=str(user.id),
-        additional_claims={"role": user.role}
+        additional_claims={
+            "role": user.role,
+            "username": user.username,
+            "email": user.email,
+        }
     )
 
     return {"message": "User created successfully", "token": token}, 201
@@ -37,7 +41,11 @@ def login_user(data):
 
     token = create_access_token(
         identity=str(user.id),
-        additional_claims={"role": user.role}
+        additional_claims={
+            "role": user.role,
+            "username": user.username,
+            "email": user.email,
+        }
     )
 
     return {"token": token}, 200
