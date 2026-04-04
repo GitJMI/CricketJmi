@@ -16,7 +16,13 @@ def register_user(data):
     db.session.add(user)
     db.session.commit()
 
-    return {"message": "User created successfully"}, 201
+    # Automatically issue token to log them in directly
+    token = create_access_token(
+        identity=str(user.id),
+        additional_claims={"role": user.role}
+    )
+
+    return {"message": "User created successfully", "token": token}, 201
 
 
 def login_user(data):
