@@ -1,10 +1,11 @@
 from app.extensions import db
 from datetime import datetime
+import uuid
 
 class User(db.Model):
     __tablename__ = "users"
     
-    id = db.Column(db.Integer , primary_key = True)
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     username = db.Column(db.String(100) , unique = True )
     email = db.Column(db.String(255),unique = True)
     password_hash = db.Column(db.Text)

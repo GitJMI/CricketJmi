@@ -40,11 +40,11 @@ def get_messages(channel_id):
     for msg in messages:
         user = User.query.get(msg.user_id)
         result.append({
-            "id": msg.id,
-            "user_id": msg.user_id,
+            "id": str(msg.id),
+            "user_id": str(msg.user_id),
             "username": user.username if user else "Unknown",
             "message": msg.message,
             "created_at": msg.created_at.isoformat() + "Z",  # 'Z' = UTC
         })
 
-    return jsonify(result[::-1]), 200  # reverse for oldest → newest
+    return jsonify(result[::-1]), 200  # reverse for oldest → newest

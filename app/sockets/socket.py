@@ -37,7 +37,7 @@ def init_socket(app):
                 token = token.split(" ")[1]
             try:
                 decoded = decode_token(token)
-                user_id = int(decoded["sub"])
+                user_id = str(decoded["sub"])
             except Exception:
                 pass  # ignore invalid token
 
@@ -106,7 +106,7 @@ def handle_message(data):
 
     try:
         decoded = decode_token(token)
-        user_id = int(decoded["sub"])
+        user_id = str(decoded["sub"])
     except Exception as e:
         emit("error", {"msg": f"Invalid token: {str(e)}"})
         return
@@ -140,9 +140,11 @@ def handle_message(data):
 
     # Broadcast with username
     emit("receive_message", {
+        "id": msg.id,
         "user_id": user_id,
         "username": user.username,
-        "message": message_text
+        "message": message_text,
+        "created_at": msg.created_at.isoformat() + "Z",
     }, room=room)
 # =========================
 # HELPER FUNCTION

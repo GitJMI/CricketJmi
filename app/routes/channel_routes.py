@@ -6,6 +6,15 @@ from app.extensions import db
 
 channel_bp = Blueprint("channels", __name__)
 
+
+def _clean_channel_type(channel_type):
+    if channel_type is None:
+        return ""
+    text = str(channel_type).strip()
+    if not text or text.lower() == "null":
+        return ""
+    return text
+
 # =========================
 # GET ALL CHANNELS
 # =========================
@@ -28,7 +37,7 @@ def get_channels():
         result.append({
             "id": ch.id,
             "name": ch.name,
-            "type": ch.type,
+            "type": _clean_channel_type(ch.type),
             "is_active": ch.is_active
         })
 
@@ -54,7 +63,7 @@ def get_channel(channel_id):
     return {
         "id": ch.id,
         "name": ch.name,
-        "type": ch.type,
+        "type": _clean_channel_type(ch.type),
         "iframe_url": ch.iframe_url
     }, 200
 
@@ -87,7 +96,7 @@ def update_channel(channel_id):
         "channel": {
             "id": ch.id,
             "name": ch.name,
-            "type": ch.type,
+            "type": _clean_channel_type(ch.type),
             "is_active": ch.is_active
         }
     }, 200
