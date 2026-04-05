@@ -10,7 +10,7 @@ chat_bp = Blueprint("chat", __name__)
 # GET PREVIOUS MESSAGES
 # =========================
 @chat_bp.route("/<int:channel_id>/messages", methods=["GET"])
-@jwt_required()
+@jwt_required(optional=True)
 def get_messages(channel_id):
     limit = request.args.get("limit", 10, type=int)
     offset = request.args.get("offset", 0, type=int)
