@@ -12,3 +12,6 @@ class User(db.Model):
     created_at = db.Column(db.DateTime , default = datetime.utcnow)
     role = db.Column(db.Enum('client', 'admin', name='user_roles'), nullable=False, default='client')
     #role = db.Column(db.String(20), default="user")
+    
+    
+    #checking the commit 
