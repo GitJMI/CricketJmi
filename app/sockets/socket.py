@@ -8,7 +8,7 @@ import time
 
 user_last_message_time = {}  # { user_id: timestamp }
 MESSAGE_COOLDOWN = 2  # seconds
-socketio = SocketIO(cors_allowed_origins="*")
+socketio = SocketIO()
 
 # =========================
 # IN-MEMORY STORAGE
@@ -19,7 +19,10 @@ sid_room_map = {}       # { sid: room }
 
 
 def init_socket(app):
-    socketio.init_app(app)
+    socketio.init_app(
+        app,
+        cors_allowed_origins=app.config.get("SOCKET_CORS_ORIGINS", []),
+    )
 
     # =========================
     # JOIN ROOM (CHANNEL)

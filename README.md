@@ -69,6 +69,10 @@ dbname=your_db_name
 # JWT & Flask
 JWT_SECRET_KEY=your_jwt_secret
 SECRET_KEY=your_flask_secret
+
+# CORS (comma-separated origins)
+CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,https://cricketjmi.vercel.app
+SOCKET_CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,https://cricketjmi.vercel.app
 ```
 
 > SSL (`sslmode=require`) is enforced automatically for Supabase connections.

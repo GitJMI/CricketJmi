@@ -9,10 +9,14 @@ from app.sockets.socket import init_socket
 
 def create_app():
     app = Flask(__name__)
-    CORS(app) # Enable CORS for all routes
-
-
     app.config.from_object(Config)
+
+    CORS(
+        app,
+        resources={r"/api/*": {"origins": app.config["CORS_ORIGINS"]}},
+        allow_headers=app.config["CORS_ALLOW_HEADERS"],
+        methods=app.config["CORS_METHODS"],
+    )
 
 
     db.init_app(app)
